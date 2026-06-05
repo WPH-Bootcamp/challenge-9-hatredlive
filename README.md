@@ -1,4 +1,5 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/3nE7zRUN)
+
 # Challenge 9 - Movie Explorer App
 
 Selamat datang di Challenge 9! Di assignment ini, kalian akan membangun sebuah aplikasi web Movie Explorer menggunakan React, TypeScript, dan berbagai modern tools yang sering digunakan di industri.
@@ -249,3 +250,7 @@ If you need anything, I'm just a message away. Let's make this the best learning
 Semangat dan success untuk kalian semua!
 
 **- Henry Rivardo**
+
+Nama: Lee Hwa Dong
+Git repository: https://github.com/WPH-Bootcamp/challenge-9-hatredlive
+Deploy link: https://delightful-bubblegum-b1dc39.netlify.app/

@@ -13,8 +13,6 @@ dist-ssr
 *.local
 
 # Environment files
-.env
-.env.local
 .env.development.local
 .env.test.local
 .env.production.local
@@ -36,3 +34,7 @@ dist-ssr
 .claude_history
 *.claude
 claude_project.json
+config.bat
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat
