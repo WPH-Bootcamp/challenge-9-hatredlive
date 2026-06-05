@@ -1,21 +1,68 @@
-import api from '@/lib/axios';
-// import { Movie, MovieResponse } from '@/types/movie';
+import api from '../lib/axios';
 
-// TODO: Create service functions to fetch data from TMDB API
-// Reference: https://developer.themoviedb.org/reference/intro/getting-started
+export type MovieVideo = {
+  key: string;
+  name: string;
+  site: string;
+  type: string;
+};
 
-export const movieService = {
-  // TODO: Implement getPopularMovies function
-  // Endpoint: GET /movie/popular
+export type MovieCast = {
+  cast_id: number;
+  character: string;
+  name: string;
+  profile_path?: string | null;
+};
 
-  // TODO: Implement getNowPlayingMovies function
-  // Endpoint: GET /movie/now_playing
+export type MovieSummary = {
+  id: number;
+  title: string;
+  overview?: string;
+  poster_path?: string | null;
+  release_date?: string;
+  vote_average?: number;
+  adult?: boolean;
+  backdrop_path?: string | null;
+  runtime?: number;
+  genres?: Array<{ id: number; name: string }>;
+  videos?: { results: MovieVideo[] };
+  credits?: { cast: MovieCast[] };
+  similar?: { results: MovieSummary[] };
+};
 
-  // TODO: Implement getMovieDetails function
-  // Endpoint: GET /movie/{movie_id}
+export type MovieListResponse = {
+  page: number;
+  results: MovieSummary[];
+  total_pages: number;
+  total_results: number;
+};
 
-  // TODO: Implement searchMovies function
-  // Endpoint: GET /search/movie
+export type MovieDetailResponse = MovieSummary & {
+  runtime: number;
+  genres: Array<{ id: number; name: string }>;
+  videos: { results: MovieVideo[] };
+  credits: { cast: MovieCast[] };
+  similar: { results: MovieSummary[] };
+};
 
-  // TODO: Add more endpoints as needed
+export const getPopularMovies = (page = 1) => {
+  return api.get<MovieListResponse>('/movie/popular', { params: { page } }).then((r) => r.data);
+};
+
+export const getNowPlaying = (page = 1) => {
+  return api.get<MovieListResponse>('/movie/now_playing', { params: { page } }).then((r) => r.data);
+};
+
+export const getMovieDetail = (id: number) => {
+  return api
+    .get<MovieDetailResponse>(`/movie/${id}`, {
+      params: { append_to_response: 'videos,credits,similar' },
+    })
+    .then((r) => r.data);
+};
+
+export const searchMovies = (query: string, page = 1) => {
+  return api
+    .get<MovieListResponse>('/search/movie', { params: { query, page } })
+    .then((r) => r.data);
 };

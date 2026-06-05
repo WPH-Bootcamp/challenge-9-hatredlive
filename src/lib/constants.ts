@@ -39,3 +39,4 @@ export const QUERY_KEYS = {
     search: (query: string, page: number) => ['movies', 'search', query, page] as const,
   },
 } as const;
+export const TMDB_IMAGE_BASE_URL = import.meta.env.VITE_TMDB_IMAGE_BASE_URL as string;

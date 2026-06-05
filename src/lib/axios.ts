@@ -1,17 +1,25 @@
 import axios from 'axios';
 
-// TODO: Create axios instance with base configuration
-// Hint: Use environment variables for API URL and API key
-// Reference: https://axios-http.com/docs/instance
+const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 const api = axios.create({
-  // TODO: Configure baseURL from environment variable
-  // TODO: Add default headers (API key, content-type)
+  baseURL: (import.meta.env.VITE_TMDB_BASE_URL as string) || 'https://api.themoviedb.org/3',
+  params: API_KEY ? { api_key: API_KEY } : {},
 });
 
-// TODO: Add request interceptor if needed
-// Hint: You can add API key to every request here
+// Request interceptor: ensure API key present
+api.interceptors.request.use((config) => {
+  if (!config.params) config.params = {};
+  if (API_KEY && !config.params['api_key']) config.params['api_key'] = API_KEY;
+  return config;
+});
 
-// TODO: Add response interceptor for error handling
+// Response interceptor: pass through or normalize errors
+api.interceptors.response.use(
+  (res) => res,
+  (err) => {
+    return Promise.reject(err);
+  }
+);
 
 export default api;
